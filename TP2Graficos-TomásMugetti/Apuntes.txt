@@ -1,0 +1,9 @@
+Usar dinamicas para debug, estaticas para release.
+https://www.sfml-dev.org/tutorials/2.4/start-vc.php
+https://www.sfml-dev.org/tutorials/2.4/
+
+.Lib(s): 
+.lib->dynamic release.
+-s-d.lib ->static debug
+-d.lib-> dynamic debug
+-s.lib ->static release
