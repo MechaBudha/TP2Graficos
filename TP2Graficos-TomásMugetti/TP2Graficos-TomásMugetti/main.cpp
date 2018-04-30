@@ -2,8 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include<SFML/System.hpp>
 #include <iostream>
+#include "PlayState.h"
 #define SPD 200
-
+/*
 void movement(sf::Sprite &player1, sf::Sprite &player2, float tiempo) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { player1.move(0, -SPD * tiempo); }
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { player1.move(0, SPD *tiempo); }
@@ -48,5 +49,16 @@ void main() {
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+		{
+			window.close();
+		}
 	}
+}
+*/
+void main(){
+	bool init = false;
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Juego");
+	PlayState play(window,init);
+	play.Start();
 }
