@@ -71,13 +71,15 @@ void PlayState::Movement(sf::Sprite &player1, sf::Sprite &player2, float tiempo,
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { player1.move(0, SPD *tiempo); }
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) { player2.move(0, -SPD * tiempo); }
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) { player2.move(0, SPD * tiempo); }
-	//OOB(player1,tam);
-	//OOB(player2, tam);
+	OOB(player1,tam);
+	OOB(player2, tam);
 }
 void PlayState::OOB(sf::Sprite &caja, sf::Vector2u tam) {
 	sf::Vector2f pos = caja.getPosition();
+	sf::FloatRect tamCaja = caja.getLocalBounds();
 	if (pos.y < 0){	caja.setPosition(pos.x,0);}
-	if (pos.y > tam.y) { caja.setPosition(pos.x,tam.y); }
+	if (pos.y > tam.y - tamCaja.height) { caja.setPosition(pos.x,tam.y- tamCaja.height); }
 	if (pos.x < 0) { caja.setPosition(0,pos.y); }
-	if (pos.x < tam.x) { caja.setPosition(tam.x,pos.y); }
+	if (pos.x > tam.x - tamCaja.width) { caja.setPosition(tam.x,pos.y - tamCaja.width); }
+	//std::cout << caja.getPosition().x << " " << caja.getPosition().y << std::endl;
 }
