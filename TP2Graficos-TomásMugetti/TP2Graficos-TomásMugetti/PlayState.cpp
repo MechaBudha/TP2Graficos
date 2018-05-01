@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include<SFML/System.hpp>
 #include <iostream>
-#define SPD 200
+#include "Player.h"
 
 
 PlayState::PlayState(sf::RenderWindow &_window, bool &init)
@@ -18,36 +18,32 @@ PlayState::~PlayState()
 }
 
 void PlayState::Start() {
+	//utilidad
 	bool playing = true;
 	sf::Clock clock;
-	sf::Texture texturePlayer1;
-	sf::Texture texturePlayer2;
-	if (!texturePlayer1.loadFromFile("Assets/Img/Azul.png"))
-	{
-		std::cout << "Textura no carga maicol." << std::endl;
-	}
-	if (!texturePlayer2.loadFromFile("Assets/Img/Rojo.png"))
-	{
-		std::cout << "Textura no carga maicol." << std::endl;
-	}
-	texturePlayer1.setRepeated(false);
-	texturePlayer1.setSmooth(true);
-	texturePlayer2.setRepeated(false);
-	texturePlayer2.setSmooth(true);
+	sf::Time tiempo;
+	float elapsed;
 
-	sf::Sprite spritePlayer1;
-	spritePlayer1.setTexture(texturePlayer1);
-	sf::Sprite spritePlayer2;
-	spritePlayer2.setTexture(texturePlayer2);
+	//entidades
+	Player* jugador = new Player(*window, 0,0);
 
 	while (playing)
 	{
+		//comienzo ciclo nuevo en limpio
+		tiempo = clock.restart();
+		elapsed = tiempo.asSeconds();
 		window->clear();
-		window->draw(spritePlayer1);
-		window->draw(spritePlayer2);
+
+
+		//updates
+		jugador->Update(elapsed);
+
+
+		//una vez dibujado todo
 		window->display();
-		sf::Time elapsed = clock.restart();
-		Movement(spritePlayer1, spritePlayer2, elapsed.asSeconds(), window->getSize());
+
+
+		//eventos de salida
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
@@ -63,23 +59,4 @@ void PlayState::Start() {
 			std::cout << "Sale por escape" << std::endl;
 		}
 	}
-}
-
-
-void PlayState::Movement(sf::Sprite &player1, sf::Sprite &player2, float tiempo, sf::Vector2u tam) {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { player1.move(0, -SPD * tiempo); }
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { player1.move(0, SPD *tiempo); }
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) { player2.move(0, -SPD * tiempo); }
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) { player2.move(0, SPD * tiempo); }
-	OOB(player1,tam);
-	OOB(player2, tam);
-}
-void PlayState::OOB(sf::Sprite &caja, sf::Vector2u tam) {
-	sf::Vector2f pos = caja.getPosition();
-	sf::FloatRect tamCaja = caja.getLocalBounds();
-	if (pos.y < 0){	caja.setPosition(pos.x,0);}
-	if (pos.y > tam.y - tamCaja.height) { caja.setPosition(pos.x,tam.y- tamCaja.height); }
-	if (pos.x < 0) { caja.setPosition(0,pos.y); }
-	if (pos.x > tam.x - tamCaja.width) { caja.setPosition(tam.x,pos.y - tamCaja.width); }
-	//std::cout << caja.getPosition().x << " " << caja.getPosition().y << std::endl;
 }
