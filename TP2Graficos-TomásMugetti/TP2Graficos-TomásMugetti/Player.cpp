@@ -22,6 +22,8 @@ Player::Player(sf::RenderWindow &_window, float	X,float Y, bool &_start, bool &_
 	nave.setTexture(textura);
 	nave.setTextureRect(sf::IntRect(0,0,50,50));
 	nave.setPosition(X,Y);
+	Trazo::window = &_window;
+	cola = new Trazo(nave, movY);
 }
 
 void Player::Update(float elapsed){
@@ -39,6 +41,7 @@ void Player::Update(float elapsed){
 		OOB(window->getSize());
 		Movimiento(movY, elapsed);
 		animar(elapsed);
+		Trazar(elapsed);
 		window->draw(nave);
 
 	}
@@ -83,6 +86,14 @@ void Player::animar(float elapsed) {
 			nave.setTexture(textura, false);
 		}
 		frame = !frame;
+	}
+}
+
+void Player::Trazar(float elapsed){
+	Trazo::elapsed = elapsed;
+	if (!cola->TocaFuente())
+	{
+		cola = new Trazo(nave,movY);
 	}
 }
 
