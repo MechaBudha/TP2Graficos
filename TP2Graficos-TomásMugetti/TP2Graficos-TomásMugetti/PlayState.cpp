@@ -9,6 +9,8 @@
 PlayState::PlayState(sf::RenderWindow &_window, bool &init)
 {
 	init = true;
+	start = false;
+	stop = false;
 	window = &_window;
 }
 
@@ -17,7 +19,7 @@ PlayState::~PlayState()
 {
 }
 
-void PlayState::Start() {
+void PlayState::Play() {
 	//utilidad
 	bool playing = true;
 	sf::Clock clock;
@@ -25,7 +27,7 @@ void PlayState::Start() {
 	float elapsed;
 
 	//entidades
-	Player* jugador = new Player(*window, 0,0);
+	Player* jugador = new Player(*window, 0,0, start, stop);
 
 	while (playing)
 	{
@@ -60,3 +62,4 @@ void PlayState::Start() {
 		}
 	}
 }
+

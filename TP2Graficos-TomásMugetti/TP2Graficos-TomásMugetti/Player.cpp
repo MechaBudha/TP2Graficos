@@ -1,15 +1,19 @@
 #include "Player.h"
 #include <iostream>
-#define VEL 200
+#include "Constantes.h"
 
 
-Player::Player(sf::RenderWindow &_window, float	X,float Y)
+Player::Player(sf::RenderWindow &_window, float	X,float Y, bool &_start, bool &_stop)
 {
 	window = &_window;
+	start = &_start;
+	stop = &_stop;
 	movY = true;
 	vivo = true;
 	orden = true;
-
+	intro = true;
+	frame = true;
+	contFrame = 0;
 	if (!textura.loadFromFile("Assets/Img/Nave.png"))
 	{
 		std::cout << "Textura de player no carga" << std::endl;
@@ -17,6 +21,7 @@ Player::Player(sf::RenderWindow &_window, float	X,float Y)
 	textura.setRepeated(false);
 	textura.setSmooth(true);
 	nave.setTexture(textura);
+	nave.setTextureRect(sf::IntRect(0,0,50,50));
 	nave.setPosition(X,Y);
 }
 
@@ -34,20 +39,52 @@ void Player::Update(float elapsed){
 		
 		OOB(window->getSize());
 		Movimiento(movY, elapsed);
+		animar(elapsed);
 		window->draw(nave);
+
 	}
 }
+
 void Player::Movimiento(bool direc, float tiempo){
 	int velocidad;
-	if (movY) { velocidad = VEL; } else { velocidad = -VEL; }
-	nave.move(0,velocidad * tiempo);
+	if (movY) { velocidad = Constantes::vel; } else { velocidad = -Constantes::vel; }
+	if (intro){	
+		nave.move(velocidad * tiempo, velocidad * tiempo);
+	}else { nave.move(0, velocidad * tiempo); }
 }
 
 void Player::OOB(sf::Vector2u tam){
 	sf::Vector2f pos = nave.getPosition();
 	sf::FloatRect tamCaja = nave.getLocalBounds();
-	if (pos.y <= 0) { nave.setPosition(0, pos.y); movY = true; }
+	if (pos.y <= 0) { nave.setPosition(pos.x, 0); movY = true; }
 	if (pos.y >= tam.y - tamCaja.height) { nave.setPosition(pos.x, tam.y - tamCaja.height); movY = false; }
+
+	//control intro
+	if (pos.x >= Constantes::introDist && intro)
+	{
+		intro = false;
+		*start = true;
+		*stop = false;
+	}
+}
+
+void Player::animar(float elapsed) {
+	contFrame += elapsed;
+	if (contFrame >= 0.3)
+	{
+		contFrame = 0;
+		if (frame)
+		{
+			nave.setTextureRect(sf::IntRect(0,0,50,50));
+			nave.setTexture(textura, false);
+		}
+		else
+		{
+			nave.setTextureRect(sf::IntRect(0,50,50,50));
+			nave.setTexture(textura, false);
+		}
+		frame = !frame;
+	}
 }
 
 Player::~Player()

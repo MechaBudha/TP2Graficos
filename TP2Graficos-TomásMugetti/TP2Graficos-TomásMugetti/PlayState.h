@@ -7,12 +7,12 @@
 class PlayState
 {
 	sf::RenderWindow *window;
+	bool start;
+	bool stop;
 public:
 	PlayState(sf::RenderWindow &_window, bool &_init);
-	void Start();
-	void Movement(sf::Sprite &player1, sf::Sprite &player2, float tiempo, sf::Vector2u tam);
-	void OOB(sf::Sprite &caja, sf::Vector2u tam);
 	~PlayState();
+	void Play();
 };
 #endif
 
