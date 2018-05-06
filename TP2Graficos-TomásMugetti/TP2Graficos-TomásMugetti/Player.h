@@ -3,6 +3,7 @@
 
 #include <SFML\Graphics.hpp>
 #include "Constantes.h"
+#include "Trazo.h"
 
 class Player
 {
@@ -20,6 +21,7 @@ class Player
 	sf::Texture textura;
 	sf::Clock clock;
 	sf::Sprite nave;
+	sf::Sprite *cola;
 
 public:
 	Player(sf::RenderWindow &_window, float X, float Y, bool &_start, bool &_stop);

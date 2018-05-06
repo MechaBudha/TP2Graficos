@@ -12,13 +12,14 @@ Player::Player(sf::RenderWindow &_window, float	X,float Y, bool &_start, bool &_
 	orden = true;
 	intro = true;
 	frame = true;
+	cola = NULL;
 	contFrame = 0;
 	if (!textura.loadFromFile("Assets/Img/Nave.png"))
 	{
 		std::cout << "Textura de player no carga" << std::endl;
 	}
 	textura.setRepeated(false);
-	textura.setSmooth(false);
+	textura.setSmooth(true);
 	nave.setTexture(textura);
 	nave.setTextureRect(sf::IntRect(0,0,50,50));
 	nave.setPosition(X,Y);
@@ -41,6 +42,22 @@ void Player::Update(float elapsed){
 		animar(elapsed);
 		window->draw(nave);
 
+		if (cola == NULL)
+		{
+			Trazo::Trazo(nave,cola);
+		}
+		else
+		{
+			if (cola != nullptr)
+			{
+				if (!Trazo::TocaFuente(*cola, nave))
+				{
+					Trazo::Trazo(nave, cola);
+				}
+				Trazo::Trazar(elapsed, *window);
+			}
+		}
+			
 	}
 }
 

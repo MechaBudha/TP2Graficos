@@ -6,8 +6,7 @@
 #include "Constantes.h"
 
 void main(){
-	bool init = false;
 	sf::RenderWindow window(sf::VideoMode(Constantes::ANCHOPANTALLA, Constantes::ALTOPANTALLA), "Juego");
-	PlayState play(window,init);
+	PlayState play(window);
 	play.Play();
 }

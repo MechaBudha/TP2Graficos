@@ -10,7 +10,7 @@ class PlayState
 	bool start;
 	bool stop;
 public:
-	PlayState(sf::RenderWindow &_window, bool &_init);
+	PlayState(sf::RenderWindow &_window);
 	~PlayState();
 	void Play();
 };

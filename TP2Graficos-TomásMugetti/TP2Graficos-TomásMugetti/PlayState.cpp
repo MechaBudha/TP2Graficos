@@ -6,9 +6,8 @@
 #include "Player.h"
 
 
-PlayState::PlayState(sf::RenderWindow &_window, bool &init)
+PlayState::PlayState(sf::RenderWindow &_window)
 {
-	init = true;
 	start = false;
 	stop = false;
 	window = &_window;
