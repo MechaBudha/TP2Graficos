@@ -3,6 +3,9 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include<SFML/System.hpp>
+#include <iostream>
+#include "Player.h"
+#include "Fondo.h"
 
 class PlayState
 {

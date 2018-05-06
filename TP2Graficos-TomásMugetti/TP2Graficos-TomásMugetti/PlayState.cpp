@@ -1,9 +1,6 @@
 #include "PlayState.h"
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-#include<SFML/System.hpp>
-#include <iostream>
-#include "Player.h"
+
+
 
 
 PlayState::PlayState(sf::RenderWindow &_window)
@@ -26,7 +23,9 @@ void PlayState::Play() {
 	float elapsed;
 
 	//entidades
+	
 	Player* jugador = new Player(*window, 0,0, start, stop);
+	Fondo* fondo = new Fondo(*window);
 
 	while (playing)
 	{
@@ -37,6 +36,7 @@ void PlayState::Play() {
 
 
 		//updates
+		fondo->update(elapsed);
 		jugador->Update(elapsed);
 
 
@@ -57,6 +57,7 @@ void PlayState::Play() {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
 			playing = false;
+			window->clear();
 			std::cout << "Sale por escape" << std::endl;
 		}
 	}
