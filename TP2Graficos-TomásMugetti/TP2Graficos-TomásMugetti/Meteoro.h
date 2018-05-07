@@ -12,13 +12,14 @@ class Meteoro
 	int contFrame;
 	bool activo;
 public:
-	Meteoro(float Y, sf::RenderWindow &_window);
+	Meteoro(sf::RenderWindow &_window);
 	static void Init();
-	sf::FloatRect pos();
+	sf::FloatRect Pos();
 	bool GetActivo();
 	void SetActivo(bool act);
 	void Animar(float elapsed);
 	void Update(float elapsed);
+	void Init(float Y);
 
 	~Meteoro();
 };

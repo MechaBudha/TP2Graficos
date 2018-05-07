@@ -8,6 +8,6 @@
 void main(){
 	bool win = false;
 	sf::RenderWindow window(sf::VideoMode(Constantes::ANCHOPANTALLA, Constantes::ALTOPANTALLA), "Juego");
-	PlayState play(window);
+	PlayState play(window, win);
 	play.Play();
 }

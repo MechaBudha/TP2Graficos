@@ -31,6 +31,7 @@ public:
 private:
 	void Movimiento(bool direc, float tiempo);
 	void OOB(sf::Vector2u tam);
+	sf::FloatRect Pos();
 	void animar(float elapsed);
 };
 #endif // !PLAYER_H

@@ -3,7 +3,7 @@
 
 static sf::Texture texturaMeteoro;
 static sf::Texture texturaCola;
-Meteoro::Meteoro(float Y, sf::RenderWindow &_window)
+Meteoro::Meteoro(sf::RenderWindow &_window)
 {
 	window = &_window;
 	contador = 0;
@@ -11,14 +11,14 @@ Meteoro::Meteoro(float Y, sf::RenderWindow &_window)
 	activo = false;
 	sprite.setTexture(texturaMeteoro);
 	sprite.setTextureRect(sf::IntRect(0, 0, 50, 50));
-	sprite.setPosition(window->getSize().x + 50, Y);
+	sprite.setPosition(window->getSize().x + 50,0);
 	cola.setTexture(texturaCola);
 	cola.setPosition(sprite.getPosition());
 
 }
 void Meteoro::Init() {
 	if (!texturaMeteoro.loadFromFile("Assets/Img/Meteoro.png")) { std::cout << "Textura meteoro no carga" << std::endl; }
-	if (!texturaCola.loadFromFile("Assets/Img/MeteoroCola.png")) { std::cout << "Textura cola meteoro no carga" << std::endl; }
+	if (!texturaCola.loadFromFile("Assets/Img/ColaMeteoro.png")) { std::cout << "Textura cola meteoro no carga" << std::endl; }
 	texturaMeteoro.setRepeated(false);
 	texturaMeteoro.setSmooth(true);
 	texturaCola.setRepeated(false);
@@ -35,9 +35,17 @@ void Meteoro::Update(float elapsed) {
 		sprite.setPosition(window->getSize().x + 50,0);
 	}
 	cola.setPosition(sprite.getPosition());
-	Animar(elapsed);
-	window->draw(cola);
-	window->draw(sprite);
+	if (cola.getPosition().x + cola.getLocalBounds().width < 0)
+	{
+		activo = false;
+	}
+	if (activo)
+	{
+		Animar(elapsed);
+		window->draw(cola);
+		window->draw(sprite);
+	}
+	
 }
 
 void Meteoro::Animar(float elapsed) {
@@ -76,8 +84,13 @@ void Meteoro::SetActivo(bool act) {
 	activo = act;
 }
 
-sf::FloatRect Meteoro::pos() {
-	return sf::FloatRect(sprite.getPosition().x, sprite.getPosition().y, sprite.getLocalBounds().width, sprite.getLocalBounds().height);
+sf::FloatRect Meteoro::Pos() {
+	return sf::FloatRect(sprite.getPosition().x, sprite.getPosition().y, sprite.getPosition().x+sprite.getLocalBounds().width, sprite.getPosition().y+ sprite.getLocalBounds().height);
+}
+
+void Meteoro::Init(float Y) {
+	sprite.setPosition(window->getSize().x + 50,Y);
+	activo = true;
 }
 Meteoro::~Meteoro()
 {

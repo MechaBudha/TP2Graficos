@@ -27,6 +27,7 @@ void PlayState::Play() {
 	
 	Player* jugador = new Player(*window, 0,0, start, stop);
 	Fondo* fondo = new Fondo(*window);
+	ControlMeteoro* control = new ControlMeteoro(*window, *jugador);
 
 	//gameloop
 	while (playing)
@@ -39,6 +40,7 @@ void PlayState::Play() {
 
 		//updates
 		fondo->Update(elapsed);
+		control->Update(elapsed);
 		jugador->Update(elapsed);
 
 

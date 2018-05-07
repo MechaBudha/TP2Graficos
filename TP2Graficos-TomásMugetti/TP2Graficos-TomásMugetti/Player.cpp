@@ -103,6 +103,10 @@ void Player::animar(float elapsed) {
 	}
 }
 
+sf::FloatRect Player::Pos() {
+	return sf::FloatRect(nave.getPosition().x,nave.getPosition().y,nave.getPosition().x + nave.getLocalBounds().width, nave.getLocalBounds().height);
+}
+
 Player::~Player()
 {
 }

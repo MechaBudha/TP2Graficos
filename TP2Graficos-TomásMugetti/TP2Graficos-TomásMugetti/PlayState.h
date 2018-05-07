@@ -6,6 +6,7 @@
 #include <iostream>
 #include "Player.h"
 #include "Fondo.h"
+#include "ControlMeteoro.h"
 
 class PlayState
 {
