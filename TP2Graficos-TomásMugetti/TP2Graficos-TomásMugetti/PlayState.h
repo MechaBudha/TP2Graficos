@@ -12,8 +12,9 @@ class PlayState
 	sf::RenderWindow *window;
 	bool start;
 	bool stop;
+	bool *win;
 public:
-	PlayState(sf::RenderWindow &_window);
+	PlayState(sf::RenderWindow &_window, bool &_win);
 	~PlayState();
 	void Play();
 };

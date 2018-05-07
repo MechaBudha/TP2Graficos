@@ -15,7 +15,7 @@ Fondo::Fondo(sf::RenderWindow &_window)
 	orden = true;
 }
 
-void Fondo::update(float elapsed) {
+void Fondo::Update(float elapsed) {
 	if (orden){	lider = &primero;seguidor = &segundo;}else{	lider = &segundo;seguidor = &primero;}
 	lider->move(Constantes::vel * -1 * elapsed, 0);
 	seguidor->setPosition(lider->getPosition().x + lider->getLocalBounds().width, lider->getPosition().y);

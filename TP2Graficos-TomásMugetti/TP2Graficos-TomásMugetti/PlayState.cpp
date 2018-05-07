@@ -3,10 +3,11 @@
 
 
 
-PlayState::PlayState(sf::RenderWindow &_window)
+PlayState::PlayState(sf::RenderWindow &_window, bool &_win)
 {
 	start = false;
 	stop = false;
+	win = &_win;
 	window = &_window;
 }
 
@@ -27,6 +28,7 @@ void PlayState::Play() {
 	Player* jugador = new Player(*window, 0,0, start, stop);
 	Fondo* fondo = new Fondo(*window);
 
+	//gameloop
 	while (playing)
 	{
 		//comienzo ciclo nuevo en limpio
@@ -36,7 +38,7 @@ void PlayState::Play() {
 
 
 		//updates
-		fondo->update(elapsed);
+		fondo->Update(elapsed);
 		jugador->Update(elapsed);
 
 

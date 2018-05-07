@@ -14,7 +14,7 @@ class Fondo
 	bool orden;
 public:
 	Fondo(sf::RenderWindow &_window);
-	void update(float elapsed);
+	void Update(float elapsed);
 	~Fondo();
 };
 #endif // !FONDO_H
