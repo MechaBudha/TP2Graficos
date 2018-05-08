@@ -45,10 +45,11 @@ void Trazo::Trazar(float elapsed, sf::RenderWindow &window) {
 
 
 bool Trazo::TocaFuente(sf::Sprite sprite, sf::Sprite fuente) {
-	float spriteX = sprite.getPosition().x;
-	float fuenteX = fuente.getPosition().x;
-	float spriteWidth = sprite.getLocalBounds().width;
-	if (spriteX > fuenteX - (spriteWidth/2))
+	sf::Vector2f spritePos = sprite.getPosition();
+	sf::Vector2f fuentePos = fuente.getPosition();
+	sf::FloatRect spriteTam = sprite.getLocalBounds();
+	sf::FloatRect fuenteTam = fuente.getLocalBounds();
+	if (spritePos.x > fuentePos.x - (spriteTam.width/2) && spritePos.x < fuentePos.x + fuenteTam.width + (spriteTam.width/2))
 	{
 		return true;
 	}

@@ -40,8 +40,8 @@ void PlayState::Play() {
 
 		//updates
 		fondo->Update(elapsed);
-		control->Update(elapsed);
 		jugador->Update(elapsed);
+		control->Update(elapsed);
 
 
 		//una vez dibujado todo

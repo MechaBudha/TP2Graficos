@@ -7,13 +7,13 @@
 
 class Player
 {
-	bool movY;
 	bool vivo;
-	bool orden;
 	bool intro;
 	bool *start;
 	bool *stop;
 	bool frame; //true = frame 1, false = frame 2
+	int velX;
+	int velY;
 
 	float contFrame;
 
@@ -29,7 +29,7 @@ public:
 	~Player();
 
 private:
-	void Movimiento(bool direc, float tiempo);
+	void Movimiento(float tiempo);
 	void OOB(sf::Vector2u tam);
 	sf::FloatRect Pos();
 	void animar(float elapsed);
