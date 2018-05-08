@@ -3,7 +3,6 @@
 
 #include <SFML\Graphics.hpp>
 #include "Constantes.h"
-#include "Trazo.h"
 
 class Player
 {

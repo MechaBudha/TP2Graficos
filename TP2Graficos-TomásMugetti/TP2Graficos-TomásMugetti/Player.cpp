@@ -33,21 +33,7 @@ void Player::Update(float elapsed){
 		animar(elapsed);
 		
 
-		if (cola == NULL)
-		{
-			Trazo::Trazo(nave,cola);
-		}
-		else
-		{
-			if (cola != nullptr)
-			{
-				if (!Trazo::TocaFuente(*cola, nave))
-				{
-					Trazo::Trazo(nave, cola);
-				}
-				Trazo::Trazar(elapsed, *window);
-			}
-		}
+		
 		window->draw(nave);
 	}
 }
