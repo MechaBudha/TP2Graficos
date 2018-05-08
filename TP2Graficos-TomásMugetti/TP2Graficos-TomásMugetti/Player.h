@@ -25,12 +25,12 @@ class Player
 public:
 	Player(sf::RenderWindow &_window, float X, float Y, bool &_start, bool &_stop);
 	void Update(float elapsed);
+	sf::FloatRect Pos();
 	~Player();
 
 private:
 	void Movimiento(float tiempo);
 	void OOB(sf::Vector2u tam);
-	sf::FloatRect Pos();
 	void animar(float elapsed);
 };
 #endif // !PLAYER_H

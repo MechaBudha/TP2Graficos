@@ -2,9 +2,10 @@
 
 
 
-ControlMeteoro::ControlMeteoro(sf::RenderWindow &_window, Player &_jugador)
+ControlMeteoro::ControlMeteoro(sf::RenderWindow &_window, Player &_jugador, bool &_playing)
 {
 	Meteoro::Init();
+	playing = &_playing;
 	srand(time(0));
 	contador = 0;
 	tempo = 0;
@@ -35,8 +36,28 @@ void ControlMeteoro::Update(float elapsed) {
 		}
 		
 	}
+	Contacto();
 }
 
+void ControlMeteoro::Contacto() {
+	sf::FloatRect mete;
+	sf::FloatRect nav = jugador->Pos();
+	sf::FloatRect inter;
+	for (int i = 0; i < TAM; i++)
+	{
+		if (grupo[i]->GetActivo()) {
+			mete = grupo[i]->Pos();
+			if (mete.intersects(nav, inter))
+			{
+				if (inter.width != 0 && inter.height!= 0)
+				{
+					*playing = false;
+				}
+				
+			}
+		}
+	}
+}
 
 ControlMeteoro::~ControlMeteoro()
 {

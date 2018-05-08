@@ -85,7 +85,7 @@ void Meteoro::SetActivo(bool act) {
 }
 
 sf::FloatRect Meteoro::Pos() {
-	return sf::FloatRect(sprite.getPosition().x, sprite.getPosition().y, sprite.getPosition().x+sprite.getLocalBounds().width, sprite.getPosition().y+ sprite.getLocalBounds().height);
+	return sf::FloatRect(sprite.getPosition().x, sprite.getPosition().y, sprite.getLocalBounds().width, sprite.getLocalBounds().height);
 }
 
 void Meteoro::Init(float Y) {
